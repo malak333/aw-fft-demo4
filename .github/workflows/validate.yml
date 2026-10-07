@@ -1,0 +1,26 @@
+name: FFT demo validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  validate:
+    name: Validate
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Validate FFT page
+        shell: pwsh
+        run: |
+          if (Test-Path index.html) {
+            python -B -c "import hashlib,pathlib; assert hashlib.sha256(pathlib.Path('index.html').read_bytes()).hexdigest() == 'decf9751aa786629cc557cb1856f9a012b0d1ceb2fe9ae3bd8cd20a077d202e2'; print('Exact FFT website validated')"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          } else {
+            Write-Output "Initialized repository; FFT page validation runs when the feature is added."
+          }
