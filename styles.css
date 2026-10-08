@@ -1,0 +1,183 @@
+/* === Base and typography === */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 1rem;
+  color: #292337;
+  background: #faf7f0;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+/* === Skip link === */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  background: #51436b;
+  color: #faf7f0;
+  padding: 0.5rem 1rem;
+  z-index: 10;
+  text-decoration: none;
+  border-radius: 0 0 4px 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* === Header and navigation === */
+
+header {
+  border-bottom: 1px solid #c8bfb0;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+header h1 {
+  color: #51436b;
+  margin: 0 0 0.25rem;
+  font-size: 2rem;
+}
+
+header p {
+  color: #4a3f5c;
+  margin: 0;
+  font-style: italic;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+nav a {
+  color: #51436b;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+}
+
+nav a:hover,
+nav a:focus {
+  border-color: #51436b;
+  outline: none;
+}
+
+nav a:focus {
+  box-shadow: 0 0 0 3px rgba(81, 67, 107, 0.35);
+}
+
+/* === Main content === */
+
+main {
+  padding: 0.5rem 0;
+}
+
+main section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #e0d9cf;
+}
+
+main section:last-child {
+  border-bottom: none;
+}
+
+h2 {
+  color: #51436b;
+  font-size: 1.5rem;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+h3 {
+  color: #51436b;
+  font-size: 1.2rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+/* === Character profiles === */
+
+#characters article {
+  background: #f2ecde;
+  border-left: 3px solid #51436b;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+#characters article:last-child {
+  margin-bottom: 0;
+}
+
+#characters article h3 {
+  margin-top: 0;
+  color: #51436b;
+}
+
+/* === Footer === */
+
+footer {
+  border-top: 1px solid #bbb;
+  padding-top: 1rem;
+  margin-top: 2rem;
+  color: #6b5f7a;
+  font-size: 0.9rem;
+}
+
+/* === Focus treatment === */
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #51436b;
+  outline-offset: 2px;
+}
+
+/* === Responsive === */
+
+@media (max-width: 36rem) {
+  html {
+    font-size: 16px;
+  }
+
+  header h1 {
+    font-size: 1.6rem;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  #characters article {
+    padding: 0.75rem 1rem;
+  }
+}
