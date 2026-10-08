@@ -18,9 +18,16 @@ jobs:
       - name: Validate FFT page
         shell: pwsh
         run: |
-          if (Test-Path index.html) {
-            python -B -c "import hashlib,pathlib; assert hashlib.sha256(pathlib.Path('index.html').read_bytes()).hexdigest() == 'decf9751aa786629cc557cb1856f9a012b0d1ceb2fe9ae3bd8cd20a077d202e2'; print('Exact FFT website validated')"
+          if (-not (Test-Path index.html -PathType Leaf)) {
+            Write-Error "The FFT website is missing index.html."
+            exit 1
+          }
+          if (Test-Path tests/test_site.py) {
+            python -B -c "import unittest; suite = unittest.defaultTestLoader.discover('tests'); assert suite.countTestCases() > 0, 'Website tests are required'"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            python -B -m unittest discover -s tests -v
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           } else {
-            Write-Output "Initialized repository; FFT page validation runs when the feature is added."
+            python -B -c "import hashlib,pathlib; assert hashlib.sha256(pathlib.Path('index.html').read_bytes()).hexdigest() == 'decf9751aa786629cc557cb1856f9a012b0d1ceb2fe9ae3bd8cd20a077d202e2'; print('Exact legacy FFT website validated')"
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
